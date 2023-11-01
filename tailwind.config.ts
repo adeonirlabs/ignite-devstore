@@ -14,6 +14,8 @@ const config: Config = {
         215: '54rem',
       },
       maxWidth: {
+        64: '16rem',
+        72: '18rem',
         '8xl': '90rem',
         '9xl': '100rem',
       },

@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="max-h-215 grid-rows-2 grid grid-cols-3 gap-6">
       <Link
-        className="group col-span-2 row-span-2 flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900"
+        className="group relative col-span-2 row-span-2 flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900"
         href="/"
       >
         <Image
@@ -16,8 +16,14 @@ export default function Home() {
           src="/assets/moletom-ai-side.png"
           width={860}
         />
+        <div className="max-w-72 absolute bottom-28 right-28 flex h-12 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
+          <span className="truncate">Moletom AI Side</span>
+          <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 font-semibold">
+            R$ 129
+          </span>
+        </div>
       </Link>
-      <Link className="group flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900" href="/">
+      <Link className="group relative flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900" href="/">
         <Image
           alt=""
           className="transition-transform group-hover:scale-105"
@@ -26,8 +32,14 @@ export default function Home() {
           src="/assets/moletom-ia-p-devs.png"
           width={430}
         />
+        <div className="max-w-64 absolute bottom-12 right-12 flex h-10 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
+          <span className="truncate text-sm">Moletom IA para Devs</span>
+          <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 text-sm font-semibold">
+            R$ 129
+          </span>
+        </div>
       </Link>
-      <Link className="group flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900" href="/">
+      <Link className="group relative flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900" href="/">
         <Image
           alt=""
           className="transition-transform group-hover:scale-105"
@@ -36,6 +48,12 @@ export default function Home() {
           src="/assets/moletom-never-stop-learning.png"
           width={430}
         />
+        <div className="max-w-64 absolute bottom-12 right-12 flex h-10 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
+          <span className="truncate text-sm">Moletom Never Stop Learning</span>
+          <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 text-sm font-semibold">
+            R$ 129
+          </span>
+        </div>
       </Link>
     </div>
   )
