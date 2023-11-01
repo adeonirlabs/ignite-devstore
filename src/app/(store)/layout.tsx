@@ -4,7 +4,7 @@ import { Header } from '~/components/header'
 
 export default function Layout({ children }: { children: ReactNode }) {
   return (
-    <main>
+    <main className="mx-auto grid min-h-screen w-full max-w-9xl grid-rows-app gap-5 p-8">
       <Header />
       {children}
     </main>

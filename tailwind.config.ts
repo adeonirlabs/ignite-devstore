@@ -6,6 +6,12 @@ const config: Config = {
     fontFamily: {
       sans: ['var(--font-inter)', 'sans-serif'],
     },
+    gridTemplateRows: {
+      app: 'min-content max-content',
+    },
+    maxWidth: {
+      '8xl': '90rem',
+      '9xl': '100rem',
     },
   },
   plugins: [],
