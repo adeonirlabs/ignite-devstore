@@ -10,6 +10,9 @@ const config: Config = {
       gridTemplateRows: {
         app: 'min-content max-content',
       },
+      height: {
+        215: '54rem',
+      },
       maxHeight: {
         215: '54rem',
       },
