@@ -1,5 +1,7 @@
 import data from '../data.json'
 
-export default function GET() {
-  return Response.json(data.products)
+export function GET() {
+  const featured = data.products.filter((product) => product.featured)
+
+  return Response.json(featured)
 }
