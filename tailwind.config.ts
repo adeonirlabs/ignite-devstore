@@ -22,6 +22,9 @@ const config: Config = {
         '8xl': '90rem',
         '9xl': '100rem',
       },
+      screens: {
+        '2xl': '1366px',
+      },
     },
   },
   plugins: [],
