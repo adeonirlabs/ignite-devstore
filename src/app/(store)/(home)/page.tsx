@@ -1,7 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
-export default function Home() {
+import { productSchema } from '~/schemas/products'
+import { api } from '~/utils/api'
+import { currency } from '~/utils/format'
+
+export default async function Home() {
+  const response = await api('products/featured')
+  const result = await response.json()
+
+  const products = productSchema.array().safeParse(result)
+
+  if (!products.success) {
+    throw new Error('Erro ao carregar produtos')
+  }
+
+  const [highlight, ...others] = products.data
+
   return (
     <div className="grid max-h-215 grid-cols-3 grid-rows-2 gap-6">
       <Link
@@ -12,49 +27,41 @@ export default function Home() {
           alt=""
           className="transition-transform group-hover:scale-105"
           height={860}
+          priority
           quality={100}
-          src="/assets/moletom-ai-side.png"
+          src={`/assets/${highlight.image}`}
           width={860}
         />
         <div className="absolute bottom-28 right-28 flex h-12 max-w-72 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
-          <span className="truncate">Moletom AI Side</span>
+          <span className="truncate">{highlight.title}</span>
           <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 font-semibold">
-            R$ 129
+            {currency(highlight.price)}
           </span>
         </div>
       </Link>
-      <Link className="group relative flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900" href="/">
-        <Image
-          alt=""
-          className="transition-transform group-hover:scale-105"
-          height={430}
-          quality={100}
-          src="/assets/moletom-ia-p-devs.png"
-          width={430}
-        />
-        <div className="absolute bottom-12 right-12 flex h-10 max-w-64 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
-          <span className="truncate text-sm">Moletom IA para Devs</span>
-          <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 text-sm font-semibold">
-            R$ 129
-          </span>
-        </div>
-      </Link>
-      <Link className="group relative flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900" href="/">
-        <Image
-          alt=""
-          className="transition-transform group-hover:scale-105"
-          height={430}
-          quality={100}
-          src="/assets/moletom-never-stop-learning.png"
-          width={430}
-        />
-        <div className="absolute bottom-12 right-12 flex h-10 max-w-64 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
-          <span className="truncate text-sm">Moletom Never Stop Learning</span>
-          <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 text-sm font-semibold">
-            R$ 129
-          </span>
-        </div>
-      </Link>
+      {others.map((item) => (
+        <Link
+          className="group relative flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900"
+          href="/"
+          key={item.id}
+        >
+          <Image
+            alt=""
+            className="transition-transform group-hover:scale-105"
+            height={430}
+            priority
+            quality={100}
+            src={`/assets/${item.image}`}
+            width={430}
+          />
+          <div className="absolute bottom-12 right-12 flex h-10 max-w-64 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
+            <span className="truncate text-sm">{item.title}</span>
+            <span className="flex h-full items-center justify-center whitespace-nowrap rounded-full bg-violet-500 px-4 text-sm font-semibold">
+              {currency(item.price)}
+            </span>
+          </div>
+        </Link>
+      ))}
     </div>
   )
 }
