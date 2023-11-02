@@ -21,7 +21,7 @@ export default async function Home() {
     <div className="grid max-h-215 grid-cols-3 grid-rows-2 gap-6">
       <Link
         className="group relative col-span-2 row-span-2 flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900"
-        href="/"
+        href={`/product/${highlight.slug}`}
       >
         <Image
           alt=""
@@ -42,7 +42,7 @@ export default async function Home() {
       {others.map((item) => (
         <Link
           className="group relative flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900"
-          href="/"
+          href={`/product/${item.slug}`}
           key={item.id}
         >
           <Image
