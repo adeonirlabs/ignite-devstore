@@ -1,15 +1,22 @@
 import Image from 'next/image'
 import Link from 'next/link'
 
+import type { Product } from '~/schemas/products'
 import { productSchema } from '~/schemas/products'
 import { api } from '~/utils/api'
 import { currency } from '~/utils/format'
 
-export default async function Home() {
+async function getData(): Promise<Product[]> {
   const response = await api('products/featured')
-  const result = await response.json()
+  const result: Product[] = await response.json()
 
-  const parsed = productSchema.array().safeParse(result)
+  return result
+}
+
+export default async function Home() {
+  const response = await getData()
+
+  const parsed = productSchema.array().safeParse(response)
 
   if (!parsed.success) {
     throw new Error('Erro ao carregar produtos')

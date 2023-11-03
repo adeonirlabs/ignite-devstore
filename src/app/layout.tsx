@@ -7,7 +7,10 @@ import type { ReactNode } from 'react'
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' })
 
 export const metadata: Metadata = {
-  title: 'DevStore',
+  title: {
+    template: '%s | DevStore',
+    default: 'DevStore',
+  },
 }
 
 export default function RootLayout({ children }: { children: ReactNode }) {

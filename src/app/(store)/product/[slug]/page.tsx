@@ -1,5 +1,7 @@
+import type { Metadata } from 'next'
 import Image from 'next/image'
 
+import type { Product } from '~/schemas/products'
 import { productSchema } from '~/schemas/products'
 import { api } from '~/utils/api'
 import { currency } from '~/utils/format'
@@ -10,11 +12,25 @@ export interface PageProps {
   }
 }
 
-export default async function Page({ params }: PageProps) {
-  const response = await api(`products/${params.slug}`)
-  const result = await response.json()
+async function getData(slug: string): Promise<Product> {
+  const response = await api(`products/${slug}`)
+  const result: Product = await response.json()
 
-  const parsed = productSchema.safeParse(result)
+  return result
+}
+
+export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
+  const product = await getData(params.slug)
+
+  return {
+    title: product.title,
+  }
+}
+
+export default async function Page({ params }: PageProps) {
+  const response = await getData(params.slug)
+
+  const parsed = productSchema.safeParse(response)
 
   if (!parsed.success) {
     throw new Error('Erro ao carregar produtos')
