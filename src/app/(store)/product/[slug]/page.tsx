@@ -1,33 +1,42 @@
 import Image from 'next/image'
 
+import { productSchema } from '~/schemas/products'
+import { api } from '~/utils/api'
+import { currency } from '~/utils/format'
+
 export interface PageProps {
   params: {
     slug: string
   }
 }
 
-export default function Page({ params }: PageProps) {
-  const { slug } = params
+export default async function Page({ params }: PageProps) {
+  const response = await api(`products/${params.slug}`)
+  const result = await response.json()
 
-  console.info(slug)
+  const parsed = productSchema.safeParse(result)
+
+  if (!parsed.success) {
+    throw new Error('Erro ao carregar produtos')
+  }
+
+  const product = parsed.data
 
   return (
     <article className="relative grid max-h-215 grid-cols-3">
       <div className="col-span-2 overflow-hidden">
-        <Image alt="" height={1024} priority quality={100} src="/assets/moletom-never-stop-learning.png" width={1024} />
+        <Image alt="" height={1024} priority quality={100} src={`/assets/${product.image}`} width={1024} />
       </div>
 
       <div className="flex flex-col justify-center px-12">
-        <h1 className="text-3xl font-bold leading-tight">Moleton</h1>
-        <p className="mt-2 leading-relaxed text-zinc-400">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit. Eius, reprehenderit!
-        </p>
+        <h1 className="text-3xl font-bold leading-tight">{product.title}</h1>
+        <p className="mt-2 leading-relaxed text-zinc-400">{product.description}</p>
 
         <div className="mt-8 flex flex-col items-start gap-2">
           <span className="inline-block whitespace-nowrap rounded-full bg-violet-500 px-4 py-1.5 font-semibold">
-            R$ 129
+            {currency(product.price)}
           </span>
-          <span className="text-xs text-zinc-400">Em até 10x s/juros de R$ 10,75</span>
+          <span className="text-xs text-zinc-400">Em até 10x s/juros de R$ {currency(product.price / 10, true)}</span>
         </div>
 
         <div className="mt-8 space-y-4">

@@ -9,13 +9,13 @@ export default async function Home() {
   const response = await api('products/featured')
   const result = await response.json()
 
-  const products = productSchema.array().safeParse(result)
+  const parsed = productSchema.array().safeParse(result)
 
-  if (!products.success) {
+  if (!parsed.success) {
     throw new Error('Erro ao carregar produtos')
   }
 
-  const [highlight, ...others] = products.data
+  const [highlight, ...others] = parsed.data
 
   return (
     <div className="grid max-h-215 grid-cols-3 grid-rows-2 gap-6">
