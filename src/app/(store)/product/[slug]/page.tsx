@@ -12,19 +12,30 @@ export interface PageProps {
   }
 }
 
-async function getData(slug: string): Promise<Product> {
-  const response = await api(`products/${slug}`)
-  const result: Product = await response.json()
-
-  return result
-}
-
 export async function generateMetadata({ params }: PageProps): Promise<Metadata> {
   const product = await getData(params.slug)
 
   return {
     title: product.title,
   }
+}
+
+export async function generateStaticParams() {
+  const response = await api('products/featured')
+  const products: Product[] = await response.json()
+
+  return products.map((item) => ({
+    params: {
+      slug: item.slug,
+    },
+  }))
+}
+
+async function getData(slug: string): Promise<Product> {
+  const response = await api(`products/${slug}`)
+  const result: Product = await response.json()
+
+  return result
 }
 
 export default async function Page({ params }: PageProps) {
