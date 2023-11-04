@@ -1,13 +1,13 @@
 import { create } from 'zustand'
 
 interface CartItem {
-  productId: string
+  productId: number
   amount: number
 }
 
 interface Store {
   items: CartItem[]
-  addItem: (productId: string) => void
+  addItem: (productId: number) => void
 }
 
 export const useStore = create<Store>((set) => ({
