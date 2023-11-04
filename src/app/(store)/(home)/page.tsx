@@ -15,7 +15,6 @@ async function getData(): Promise<Product[]> {
 
 export default async function Page() {
   const response = await getData()
-
   const parsed = productSchema.array().safeParse(response)
 
   if (!parsed.success) {
