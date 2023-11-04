@@ -37,7 +37,7 @@ export default async function Page({ searchParams }: SearchProps) {
   const products = parsed.data
 
   return (
-    <section className="flex max-h-215 flex-col gap-4">
+    <section className="flex flex-col gap-4">
       <p className="text-sm">
         Search: <span className="font-semibold">{query}</span>
       </p>
@@ -52,11 +52,11 @@ export default async function Page({ searchParams }: SearchProps) {
             <Image
               alt=""
               className="transition-transform group-hover:scale-105"
-              height={430}
+              height={420}
               priority
               quality={100}
               src={`/assets/${item.image}`}
-              width={430}
+              width={420}
             />
             <div className="absolute bottom-12 right-12 flex h-10 max-w-64 items-center gap-2 rounded-full bg-black/70 p-0.5 pl-5 ring-2 ring-zinc-500">
               <span className="truncate text-sm">{item.title}</span>
