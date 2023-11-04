@@ -51,7 +51,7 @@ export default async function Page({ params }: PageProps) {
   const product = parsed.data
 
   return (
-    <article className="relative grid max-h-215 grid-cols-3">
+    <section className="relative grid max-h-215 grid-cols-3">
       <div className="col-span-2 overflow-hidden">
         <Image alt="" height={1024} priority quality={100} src={`/assets/${product.image}`} width={1024} />
       </div>
@@ -99,6 +99,6 @@ export default async function Page({ params }: PageProps) {
 
         <AddToCart productId={product.id} />
       </div>
-    </article>
+    </section>
   )
 }

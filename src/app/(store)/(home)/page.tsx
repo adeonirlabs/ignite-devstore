@@ -13,7 +13,7 @@ async function getData(): Promise<Product[]> {
   return result
 }
 
-export default async function Home() {
+export default async function Page() {
   const response = await getData()
 
   const parsed = productSchema.array().safeParse(response)
@@ -25,7 +25,7 @@ export default async function Home() {
   const [highlight, ...others] = parsed.data
 
   return (
-    <div className="grid max-h-215 grid-cols-3 grid-rows-2 gap-6">
+    <section className="grid max-h-215 grid-cols-3 grid-rows-2 gap-6">
       <Link
         className="group relative col-span-2 row-span-2 flex items-end justify-center overflow-hidden rounded-lg bg-zinc-900"
         href={`/product/${highlight.slug}`}
@@ -69,6 +69,6 @@ export default async function Home() {
           </div>
         </Link>
       ))}
-    </div>
+    </section>
   )
 }
