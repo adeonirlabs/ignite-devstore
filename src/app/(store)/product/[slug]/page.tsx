@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import Image from 'next/image'
 
+import { AddToCart } from '~/components/add-to-cart'
 import type { Product } from '~/schemas/products'
 import { productSchema } from '~/schemas/products'
 import { api } from '~/utils/api'
@@ -96,12 +97,7 @@ export default async function Page({ params }: PageProps) {
           </div>
         </div>
 
-        <button
-          className="mt-8 flex h-12 items-center justify-center rounded-full bg-emerald-600 font-semibold text-white"
-          type="button"
-        >
-          Adicionar à cesta
-        </button>
+        <AddToCart productId={product.id} />
       </div>
     </article>
   )
