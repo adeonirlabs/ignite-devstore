@@ -17,7 +17,7 @@ export function AddToCart({ productId }: AddToCartProps) {
       }}
       type="button"
     >
-      Adicionar à cesta
+      Adicionar ao carrinho
     </button>
   )
 }
