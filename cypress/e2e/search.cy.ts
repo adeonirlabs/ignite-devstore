@@ -1,7 +1,7 @@
 describe('search product', () => {
   it('should search for product', () => {
     cy.visit('/')
-    cy.get('input[name="q"]').type('moletom').parent().submit()
+    cy.search('moletom')
 
     cy.location('pathname').should('eq', '/search')
     cy.location('search').should('eq', '?q=moletom')
