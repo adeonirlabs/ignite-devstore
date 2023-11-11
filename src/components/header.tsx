@@ -1,6 +1,7 @@
 import Image from 'next/image'
 import Link from 'next/link'
 import type { ComponentProps } from 'react'
+import { Suspense } from 'react'
 
 import { Cart } from '~/components/cart'
 import { SearchForm } from '~/components/search'
@@ -12,7 +13,9 @@ export function Header(props: ComponentProps<'header'>) {
         <Link className="text-2xl font-extrabold text-zinc-50" href="/">
           devstore
         </Link>
-        <SearchForm />
+        <Suspense fallback={null}>
+          <SearchForm />
+        </Suspense>
       </div>
       <div className="flex items-center gap-4">
         <Cart />
